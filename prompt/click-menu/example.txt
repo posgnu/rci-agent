@@ -1,0 +1,22 @@
+Example plans)
+The task is for the agent to select Leonelle > Jane > Amabel from the HTML code provided.
+Here is a plan to solve this example task on the webpage with the autonomous agent. The agent must use "movemouse" not "clickxpath" to expand option, then click the desired option with "clickxpath".
+1. movemouse //*[text()="Leonelle"]
+2. movemouse //*[text()="Jane"]
+3. clickxpath //*[text()="Amabel"]
+
+task: Select Ailyn>Jaclyn>Kath
+plan:
+To solve the current task of selecting Ailyn > Jaclyn > Kath, here is a plan for the autonomous agent. The agent must use "movemouse" not "clickxpath" to expand option and then click the desired option with "clickxpath".
+
+1. movemouse //*[text()="Ailyn"]
+2. movemouse //*[text()="Jaclyn"]
+3. clickxpath //*[text()="Kath"]
+
+task: Select Lori>Gwenny>Bessie
+plan:
+To solve the current task of selecting Lori > Gwenny > Bessie, here is a plan for the autonomous agent. The agent must use "movemouse" not "clickxpath" to expand option and then click the desired option with "clickxpath".
+
+1. movemouse //*[text()="Lori"]
+2. movemouse //*[text()="Gwenny"]
+3. clickxpath //*[text()="Bessie"]

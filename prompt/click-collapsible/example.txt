@@ -1,0 +1,17 @@
+Example plans)
+
+task: Expand the section below and click submit.
+plan:
+1. Clickxpath //*[@id="ui-id-16"]
+2. Clickxpath //button[@id='subbtn']
+
+task: Expand the section below and click submit.
+plan:
+1. Clickxpath //*[@id="ui-id-16"]
+2. Clickxpath //button[@id='subbtn']
+
+task: Expand the section below and click submit.
+plan:
+1. Clickxpath //*[@id="ui-id-34"]
+2. Clickxpath //button[@id='subbtn']
+

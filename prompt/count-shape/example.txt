@@ -1,0 +1,8 @@
+Example plans)
+task: How many small letters are there?
+plan: we need to count the number of small letters in the svg area.
+1. clickxpath //*[@id="count-buttons"]/button[5]
+
+task: How many red items are there?
+plan: we need to count the number of red items in the svg area.
+1. clickxpath //*[@id="count-buttons"]/button[2]

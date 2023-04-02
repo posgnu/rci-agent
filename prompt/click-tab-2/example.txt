@@ -1,0 +1,19 @@
+Example plans)
+task: switch between the tabs to find and click on the link "vitae."
+Here is a plan to solve this example task on the webpage with the autonomous agent. 
+1. clickxpath //a[text()="Tab #2"] // first, open the proper tab where the link with a text "vitae." is in
+2. clickxpath //*[@id="tabs-2"]/p/span[text()="vitae."]
+
+task: Switch between the tabs to find and click on the link "fermentum.".
+plan:
+To solve the current task of switching between the tabs to find and click on the link "fermentum.", here is a plan for the autonomous agent:
+
+1. clickxpath //a[text()="Tab #1"] // First, open the tab where the link with the text "fermentum." is located.
+2. clickxpath //span[text()="fermentum."] // Click on the link with the text "fermentum."
+
+Current task: Switch between the tabs to find and click on the link "adipiscing".
+plan:
+To solve the current task of switching between the tabs to find and click on the link "adipiscing", here is a plan for the autonomous agent:
+
+1. clickxpath //a[text()="Tab #3"] // First, open the tab where the link with the text "adipiscing" is located.
+2. clickxpath //div[@id="tabs-3"]/p/span[text()="adipiscing"] // Click on the link with the text "adipiscing".

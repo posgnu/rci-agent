@@ -1,0 +1,16 @@
+Example plans)
+task: Enter the password "Zd" into both text fields and press submit.
+plan: click the first text field, type "Zd", click the second text field, type "Zd", click the submit button.
+1. clickxpath //input[@id='password']
+2. type Zd
+3. clickxpath //input[@id='verify']
+4. type Zd
+5. clickxpath //button[@id='subbtn']
+
+task: Enter the password "oz" into both text fields and press submit.
+plan: click the first text field, type "oz", click the second text field, type "oz", click the submit button.
+1. clickxpath //input[@id='password']
+2. type oz
+3. clickxpath //input[@id='verify']
+4. type oz
+5. clickxpath //button[@id='subbtn']

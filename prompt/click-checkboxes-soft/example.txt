@@ -1,0 +1,30 @@
+Example plans)
+task: select the words similar to bunnies, tiny, scared, swine and click the Submit button.
+plan: choose 4 checkboxes that are similar to bunnies, tiny, scared, swine. If the word exists in the HTML code, select the checkbox. If the word is a synonym, select the checkbox. Click the Submit button.
+1. clickxpath //label[text() = 'rabbit']/input // select the checkbox for the word 'rabbit' which is a synonym of bunnies
+2. clickxpath //label[text() = 'pig']/input // select the checkbox for the word 'pig' which is a synonym of swine
+3. clickxpath //label[text() = 'panicked']/input // select the checkbox for the word 'panicked' which is a synonym of scared
+4. clickxpath //label[text() = 'tiny']/input // select the checkbox for the word 'tiny' which exists in the HTML code
+5. clickxpath //button[@id='subbtn']
+
+task: Select words similar to vehicles, conceal, kill, sustain and click Submit.
+plan: choose 4 checkboxes that are similar to vehicles, conceal, kill, sustain. If the word exists in the HTML code, select the checkbox. If the word is a synonym, select the checkbox. Click the Submit button.
+1. clickxpath //label[text() = 'automobile']/input // select the checkbox for the word 'automobile' which is a synonym of vehicles
+2. clickxpath //label[text() = 'camouflage']/input // select the checkbox for the word 'camouflage' which is a synonym of conceal
+3. clickxpath //label[text() = 'kill']/input // select the checkbox for the word 'kill' which exists in the HTML code
+4. clickxpath //label[text() = 'keep']/input // select the checkbox for the word 'keep' which is a synonym of sustain
+5. clickxpath //button[@id='subbtn']
+
+Current task: Select words similar to home, petite and click Submit.
+plan: choose 2 checkboxes that are similar to home, petite. If the word exists in the HTML code, select the checkbox. If the word is a synonym, select the checkbox. Click the Submit button.
+1. clickxpath //label[text() = 'houses']/input // select the checkbox for the word 'houses' which is a synonym of home
+2. clickxpath //label[text() = 'little']/input // select the checkbox for the word 'little' which is a synonym of petite
+3. clickxpath //button[@id='subbtn']
+
+Current task: Select words similar to hide, halt, courageous and click Submit.
+plan: choose 3 checkboxes that are similar to hide, halt, courageous. If the word exists in the HTML code, select the checkbox. If the word is a synonym, select the checkbox. Click the Submit button.
+1. clickxpath //label[text() = 'conceal']/input // select the checkbox for the word 'conceal' which is a synonym of hide
+2. clickxpath //label[text() = 'finish']/input // select the checkbox for the word 'finish' which is a synonym of halt
+3. clickxpath //label[text() = 'courageous']/input  // select the checkbox for the word 'courageous' which exists in the HTML code
+4. clickxpath //button[@id='subbtn']
+

@@ -1,0 +1,9 @@
+Example plan:
+
+task: Click on the blue colored box.
+plan:
+1. clickxpath //div[@data-color='blue']
+
+task: Click on the red colored box.
+plan:
+1. clickxpath //div[@data-color='red']
