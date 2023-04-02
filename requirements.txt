@@ -1,0 +1,5 @@
+gym
+openai
+selenium
+Pillow
+regex

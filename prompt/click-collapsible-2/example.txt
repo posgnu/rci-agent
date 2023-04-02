@@ -1,0 +1,10 @@
+Example plans)
+The task is to find a proper section that include the text "adipiscing" and click on the link "adipiscing" on the webpage.
+Here is a plan to solve this example task on the webpage with the autonomous agent. 
+1. Clickxpath //*[@id="ui-id-3"]
+2. Clickxpath //*[@class="alink" and text()="adipiscing"]
+
+The task is to find a proper section that include the text "lectus" and click on the link "lectus" on the webpage.
+Here is a plan to solve this example task on the webpage with the autonomous agent. 
+1. clickxpath //*[@id="ui-id-19"]
+2. Clickxpath //span[@class='alink' and contains(text(), 'lectus')]
