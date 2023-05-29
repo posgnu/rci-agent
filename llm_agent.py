@@ -15,7 +15,7 @@ from computergym.miniwob.miniwob_interface.action import (
     MiniWoBMoveXpath,
 )
 import re
-
+import requests
 
 class LLMAgent:
     def __init__(
@@ -63,6 +63,8 @@ class LLMAgent:
             openai.api_key = api_key
         if self.llm == "chatgpt":
             self.model = "gpt-3.5-turbo"
+        elif self.llm == "llama":
+            self.model = "llama"
         elif self.llm == "gpt4":
             self.model = "gpt-4"
         elif self.llm == "davinci":
@@ -261,6 +263,16 @@ class LLMAgent:
                     )
 
                     message = response["choices"][0]["message"]["content"]
+                elif self.llm == "llama":
+                    url = 'http://127.0.0.1:8000'  # Replace with the actual server URL
+
+                    # Define the JSON payload
+                    payload = {
+                        'prompt': pt
+                    }
+
+                    # Send the POST request
+                    message = requests.post(url, json=payload).json()
                 else:
                     time.sleep(1)
                     response = openai.Completion.create(
