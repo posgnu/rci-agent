@@ -1,5 +1,5 @@
 Example plans)
-The task is to navigate through the file tree. Find and click on the folder or file named "Riley".
-Here is a plan to solve the example task. You should type a single word to search
+task: navigate through the file tree. Find and click on the folder or file named "Riley".
+plan:
 1. clickxpath //span[text()='Briana'] // Click the expandable hitarea of the folder "Briana"
 2. clickxpath //span[text()='Riley']
