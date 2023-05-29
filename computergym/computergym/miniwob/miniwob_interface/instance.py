@@ -161,6 +161,7 @@ class MiniWoBInstance(Thread):
             self.index
         )
         options = webdriver.ChromeOptions()
+        chromedriver  ="/usr/local/bin/chromedriver" #comment if you are not using WSL
         if self.headless:
             options.add_argument("headless")
             options.add_argument("disable-gpu")
@@ -175,7 +176,7 @@ class MiniWoBInstance(Thread):
                     9000, 30 + self.index * (self.window_height + 30)
                 )
             )
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(chromedriver, chrome_options=options)
         self.driver.implicitly_wait(5)
 
         """
