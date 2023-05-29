@@ -7,6 +7,7 @@ import urllib.parse as urlparse
 from threading import Thread
 
 import numpy as np
+import os
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
@@ -180,7 +181,7 @@ class MiniWoBInstance(Thread):
             self.driver = webdriver.Chrome(chromedriver_path, chrome_options=options)
         else :
             self.driver = webdriver.Chrome(chrome_options=options)
-            
+
         self.driver.implicitly_wait(5)
 
         """
