@@ -11,6 +11,11 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 import logging
 
+import urllib3
+urllib3.disable_warnings() # disable http warning when closing env
+import warnings
+warnings.filterwarnings("ignore") #remove Userwarning
+
 logging.basicConfig(level=logging.INFO)
 
 
