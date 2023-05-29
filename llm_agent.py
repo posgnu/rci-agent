@@ -63,6 +63,8 @@ class LLMAgent:
             openai.api_key = api_key
         if self.llm == "chatgpt":
             self.model = "gpt-3.5-turbo"
+        elif self.llm == "gpt4":
+            self.model = "gpt-4"
         elif self.llm == "davinci":
             self.model = "text-davinci-003"
         elif self.llm == "ada":
@@ -134,7 +136,7 @@ class LLMAgent:
             pt += self.prompt.example_prompt
             pt += "\n\n"
         if with_task:
-            pt += "task: "
+            pt += "Current task: "
             pt += self.task
             pt += "\n"
 
@@ -240,7 +242,7 @@ class LLMAgent:
 
         while True:
             try:
-                if self.llm == "chatgpt":
+                if self.llm == "chatgpt" or self.llm == "gpt4":
                     time.sleep(1)
                     response = openai.ChatCompletion.create(
                         model=self.model,
