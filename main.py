@@ -183,7 +183,8 @@ def miniwob(opt):
 
                 states, rewards, dones, _ = env.step([miniwob_action])
             except ValueError:
-                print("Invalid action or rci action fail")
+                llm_agent.cause = "Invalid action or rci action fail"
+                print(llm_agent.cause) #TODO: refacto
                 rewards = [0]
                 dones = [True]
                 break
@@ -201,7 +202,7 @@ def miniwob(opt):
             success += 1
             llm_agent.save_result(True)
         else:
-            llm_agent.save_result(False)
+            llm_agent.save_result(False, cause=llm_agent.cause)
         
         number_of_token_sent_per_episode.append(llm_agent.number_of_token_sent)
         number_of_token_received_per_episode.append(llm_agent.number_of_token_received)
