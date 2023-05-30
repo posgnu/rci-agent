@@ -5,25 +5,36 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python : debug main.py",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "/home/thirdcore/rci-agent/main.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "cwd": "${fileDirname}",
+            "cwd": "/home/thirdcore/rci-agent/",
             "env": "RCI-agent-WSL",
             "args": [
                 "--env",
-                "choose-list",
+                "click-dialog",
                 "--llm",
                 "chatgpt",
                 "--num-episodes",
-                "1",
+                "5",
                 "--irci",
                 "1",
                 "--sgrounding",
             ]
+        }, 
+        {
+            "name": "Python: script.py ",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/thirdcore/rci-agent/script.py",
+            "console": "integratedTerminal",
+            "cwd": "/home/thirdcore/rci-agent/",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env",
+            "args": []
         }
     ]
 }
