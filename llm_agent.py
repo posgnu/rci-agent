@@ -43,6 +43,7 @@ class LLMAgent:
         llm="chatgpt",
         with_task=True,
         state_grounding=True,
+        exp_path="",
     ) -> None:
         self.rci_limit = rci_limit
         self.rci_plan_loop = rci_plan_loop
@@ -61,6 +62,8 @@ class LLMAgent:
         self.past_plan = []
         self.past_instruction = []
         self.custom_gaol = False
+        self.cause = ""
+        self.exp_path = exp_path
 
         self.history_name = time.strftime("%Y%m%d-%H%M%S")
         config_string = (
