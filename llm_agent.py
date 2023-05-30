@@ -66,16 +66,14 @@ class LLMAgent:
         self.exp_path = exp_path
 
         self.history_name = time.strftime("%Y%m%d-%H%M%S")
-        config_string = (
-            f"erci{rci_plan_loop}_state{self.state_grounding}_irci{rci_limit}"
-        )
+
         if self.prompt.example_prompt:
             self.file_path = Path(
-                f"history/{self.llm}/{env}/{config_string}/few-shot/{self.history_name}.txt"
+                f"{self.exp_path}/few-shot/{self.history_name}.txt"
             )
         else:
             self.file_path = Path(
-                f"history/{self.llm}/{env}/{config_string}/zero-shot/{self.history_name}.txt"
+                f"{self.exp_path}/zero-shot/{self.history_name}.txt"
             )
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
 
