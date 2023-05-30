@@ -100,7 +100,7 @@ class LLMAgent:
         else:
             raise NotImplemented
 
-    def save_result(self, result):
+    def save_result(self, result, cause =""):
         with open(self.file_path, "a") as f:
             if result:
                 f.write("\n\nSUCCESS\n\n")
@@ -108,7 +108,7 @@ class LLMAgent:
                     f"{self.history_name}_success.txt"
                 )
             else:
-                f.write("\n\nFAIL\n\n")
+                f.write("\n\nFAIL : "+ cause +"\n\n")
                 new_file_path = self.file_path.with_name(
                     f"{self.history_name}_fail.txt"
                 )
