@@ -49,3 +49,4 @@ dist/**
 package.nls.*.json
 l10n/
 *.json
+*.xlsx

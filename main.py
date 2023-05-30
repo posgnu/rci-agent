@@ -1,5 +1,7 @@
 import argparse
 import random
+import time
+
 
 import computergym
 import gym
@@ -137,14 +139,20 @@ def miniwob(opt):
     number_of_token_sent_per_episode = []
     number_of_token_received_per_episode = []
     number_of_calls_per_episode = []
+    config_string = (
+        f"state_{opt.sgrounding}-erci_{opt.erci}-irci_{opt.irci}"
+    )
+    exp_path = f"history/"+ opt.llm + "/" + opt.env +  "/" + config_string + "/" + time.strftime("%Y%m%d-%H%M%S")
 
     for _ in range(opt.num_episodes):
+
         llm_agent = LLMAgent(
             opt.env,
             rci_plan_loop=opt.erci,
             rci_limit=opt.irci,
             llm=opt.llm,
             state_grounding=opt.sgrounding,
+            exp_path = exp_path,
         )
         # initialize environment
         states = env.reset(seeds=[random.random()], record_screenshots=True)
@@ -213,7 +221,8 @@ def miniwob(opt):
         "min_received": min(number_of_token_received_per_episode),
         "max_received": max(number_of_token_received_per_episode),
         "mean_received": sum(number_of_token_received_per_episode) / len(number_of_token_received_per_episode),
-        "mean_calls": sum(number_of_calls_per_episode) / len(number_of_calls_per_episode)
+        "mean_calls": sum(number_of_calls_per_episode) / len(number_of_calls_per_episode),
+        "experiment folder" : exp_path
     }
 
     return result_dict
