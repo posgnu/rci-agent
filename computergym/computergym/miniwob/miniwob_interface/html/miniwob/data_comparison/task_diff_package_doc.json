@@ -1,0 +1,10 @@
+{
+  "html_files": [
+    "drag-item",
+    "moving-items",
+    "chase-circle",
+    "terminal_reproduce",
+    "unicode-test",
+    "simon-says"
+  ]
+}
