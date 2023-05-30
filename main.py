@@ -134,6 +134,10 @@ def miniwob(opt):
     env = gym.make("MiniWoBEnv-v0", env_name=opt.env, headless=opt.headless)
 
     success = 0
+    number_of_token_sent_per_episode = []
+    number_of_token_received_per_episode = []
+    number_of_calls_per_episode = []
+
     for _ in range(opt.num_episodes):
         llm_agent = LLMAgent(
             opt.env,
@@ -190,10 +194,29 @@ def miniwob(opt):
             llm_agent.save_result(True)
         else:
             llm_agent.save_result(False)
+        
+        number_of_token_sent_per_episode.append(llm_agent.number_of_token_sent)
+        number_of_token_received_per_episode.append(llm_agent.number_of_token_received)
+        number_of_calls_per_episode.append(llm_agent.number_of_calls)
+    
+    assert len(number_of_token_sent_per_episode) == opt.num_episodes
 
-        print(f"success rate: {success / opt.num_episodes}")
-
+    success_rate = success / opt.num_episodes
+    print(f"success rate: {success_rate}")
     env.close()
+
+    result_dict = {
+        "success_rate": success_rate,
+        "min_sent": min(number_of_token_sent_per_episode),
+        "max_sent": max(number_of_token_sent_per_episode),
+        "mean_sent": sum(number_of_token_sent_per_episode) / len(number_of_token_sent_per_episode),
+        "min_received": min(number_of_token_received_per_episode),
+        "max_received": max(number_of_token_received_per_episode),
+        "mean_received": sum(number_of_token_received_per_episode) / len(number_of_token_received_per_episode),
+        "mean_calls": sum(number_of_calls_per_episode) / len(number_of_calls_per_episode)
+    }
+
+    return result_dict
 
 
 def get_html_state(opt, states):
