@@ -7,6 +7,8 @@ import main
 
 models = ["chatgpt"]
 tasks_filename ="task_names_test.json"
+with open(tasks_filename) as f:
+    task_names = json.load(f)["task_name"]
 
 opt = main.parse_opt()
 opt.llm = None
@@ -17,31 +19,40 @@ opt.erci = 1
 opt.irci = 3
 opt.sgrounding = True
 opt.headless = True
-with open(tasks_filename) as f:
-    task_names = json.load(f)["task_name"]
+
 
 setattr(opt, "models", models)
 setattr(opt, "task_names", task_names)
 
-filename = "arguments.json"
-with open(filename, "w") as f:
+#storing the arguments in a json file
+with open("arguments.json", "w") as f:
     json.dump(vars(opt), f)
 
-columns = ["model name", "task_name", "success_rate", "min_sent", "max_sent", "mean_sent", "min_received", "max_received", "mean_received", "mean_calls"]
+columns = ["model name", "task_name", "success_rate", "min tokens sent", "max tokens sent", "avg tokens sent", "min tokens received", "max tokens received", "avg tokens received", "n LLM calls", "experiment folder"]
 df = pd.DataFrame(columns=columns)
 
 for model in models :
-    print("Using model : ", model)
-    opt.llm = model
+    print("Using model : ", model, "\n")
+    opt.llm = model     # switch model
     for task_name in task_names :
         opt.env = task_name     # switch task
-        print("     Task addressed : ", opt.env)
+        print("     Task addressed : ", opt.env, "\n")
         print(opt)
         result = main.miniwob(opt)
         
-        df.loc[len(df)] = [model, task_name, result["success_rate"], result["min_sent"], result["max_sent"], result["mean_sent"], result["min_received"], result["max_received"], result["mean_received"], result["mean_calls"]]
+        df.loc[len(df)] = [model, task_name, result["success_rate"], result["min_sent"], result["max_sent"], result["mean_sent"], result["min_received"], result["max_received"], result["mean_received"], result["mean_calls"], result["experiment folder"]]
 
-filename = "result.json"
-if os.path.exists(filename):
-    os.remove(filename)
-df.to_json(filename, mode="w")
+for model in models :
+    #locate in the dataset, the rows corresponding to the model
+    df_model = df.loc[df["model name"] == model]
+    df_model = df_model.drop("model name", axis=1)
+    
+    filename = "results_"+model+".xlsx"
+    if os.path.exists(filename):
+        os.remove(filename)
+    df_model.to_excel(filename, index=False)
+    
+    filename = "results_"+model+".json"
+    if os.path.exists(filename):
+        os.remove(filename)
+    df_model.to_json(filename)
