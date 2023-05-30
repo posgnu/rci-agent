@@ -6,6 +6,7 @@ from pathlib import Path
 from selenium.webdriver.common.keys import Keys
 import os
 import logging
+import tiktoken
 
 from computergym.miniwob.miniwob_interface.action import (
     MiniWoBType,
@@ -16,6 +17,22 @@ from computergym.miniwob.miniwob_interface.action import (
 )
 import re
 
+# using tiktoken tokenizer to evaluate the number of token sent and received from OpenAI api
+def count_tokens(text, model):
+
+    model_map = {
+        "chatgpt": "gpt-3.5-turbo",
+        "gpt4": "gpt-4",
+        "davinci": "text-davinci-003",
+        "ada": "ada",
+        "babbage": "babbage",
+        "curie": "curie",
+        "davinci1": "davinci",
+        "davinci2": "text-davinci-002"
+    }
+
+    enc = tiktoken.encoding_for_model(model_map.get(model))
+    return len(enc.encode(text))
 
 class LLMAgent:
     def __init__(
@@ -34,7 +51,9 @@ class LLMAgent:
         self.state_grounding = state_grounding
 
         self.load_model()
-
+        self.number_of_token_sent = 0
+        self.number_of_token_received = 0
+        self.number_of_calls = 0
         self.html_state = ""
         self.task = ""
         self.with_task = with_task
@@ -239,6 +258,10 @@ class LLMAgent:
         logging.info(
             f"Send a request to the language model from {inspect.stack()[1].function}"
         )
+        #increment number of calls to the API
+        self.number_of_calls += 1
+        #store number of tokens sent to the API
+        self.number_of_token_sent += count_tokens(pt, model=self.llm)
 
         while True:
             try:
@@ -281,7 +304,8 @@ class LLMAgent:
             else:
                 if message:
                     break
-
+        
+        self.number_of_token_received += count_tokens(message, model=self.llm)
         return message
 
     def generate_action(self) -> str:
@@ -392,3 +416,4 @@ class LLMAgent:
             return MiniWoBElementClickOption(xpath)
         else:
             raise ValueError("Invalid instruction")
+            
