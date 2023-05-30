@@ -117,13 +117,25 @@ class LLMAgent:
 
         return
 
-    def save(self, pt):
+    def save_message(self, pt):
         with open(self.file_path, "a") as f:
             f.write("\n")
-            ho_line = "-" * 30
+            ho_line = "-" * 30 + "INPUT" + "-" * 30 
             f.write(ho_line)
             f.write("\n\n")
             f.write(pt)
+            f.write("\n")
+
+        return
+
+    def save_response(self, response):
+        with open(self.file_path, "a") as f:
+            f.write("\n")
+            ho_line = "-" * 30 + "OUTPUT" + "-" * 30 
+            f.write(ho_line)
+            f.write("\n\n")
+            f.write(response)
+            f.write("\n")
 
         return
 
@@ -169,14 +181,16 @@ class LLMAgent:
 
     def rci_plan(self, pt=None):
         pt += "\n\nFind problems with this plan for the given task compared to the example plans.\n\n"
+        self.save_message(pt)
         criticizm = self.get_response(pt)
-        self.save(pt)
+        self.save_response(criticizm)
         pt += criticizm
 
         pt += "\n\nBased on this, what is the plan for the agent to complete the task?\n\n"
         # pt += self.webpage_state_prompt()
+        self.save_message(pt)
         plan = self.get_response(pt)
-        self.save(pt)
+        self.save_response(plan)
         return pt, plan
 
     def rci_action(self, instruciton: str, pt=None):
@@ -189,8 +203,9 @@ class LLMAgent:
                 raise ValueError("Action RCI failed")
 
             pt += self.prompt.rci_action_prompt
+            self.save_message(pt)
             instruciton = self.get_response(pt)
-            self.save(pt)
+            self.save_response(instruciton)
 
 
             pt += instruciton
@@ -241,9 +256,10 @@ class LLMAgent:
         pt = self.prompt.base_prompt
         pt += self.webpage_state_prompt(True, with_task=self.with_task)
         pt += self.prompt.init_plan_prompt
-
+        
+        self.save_message(pt)
         message = "\n" + self.get_response(pt)
-        self.save(pt)
+        self.save_response(message)
 
         pt += message
 
@@ -348,8 +364,9 @@ class LLMAgent:
 
         pt += action_prompt
 
+        self.save_message(pt)
         message = self.get_response(pt)
-        self.save(pt)
+        self.save_response(message)
 
         pt += self.process_instruction(message) + "`."
 
@@ -363,9 +380,12 @@ class LLMAgent:
     def update_action(self, pt=None, message=None):
         if self.prompt.update_action and self.state_grounding:
             pt += self.prompt.update_action
+            
+            self.save_message(pt)
             message = self.get_response(pt)
-            self.save(pt)
+            self.save_response(message)
             pt += message
+
 
         return pt, message
 
