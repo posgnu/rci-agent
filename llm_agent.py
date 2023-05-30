@@ -172,12 +172,13 @@ class LLMAgent:
     def rci_plan(self, pt=None):
         pt += "\n\nFind problems with this plan for the given task compared to the example plans.\n\n"
         criticizm = self.get_response(pt)
+        self.save(pt)
         pt += criticizm
 
         pt += "\n\nBased on this, what is the plan for the agent to complete the task?\n\n"
         # pt += self.webpage_state_prompt()
         plan = self.get_response(pt)
-
+        self.save(pt)
         return pt, plan
 
     def rci_action(self, instruciton: str, pt=None):
@@ -187,11 +188,12 @@ class LLMAgent:
         while self.check_regex(instruciton):
             if loop_num >= self.rci_limit:
                 print(instruciton)
-                self.save(pt)
                 raise ValueError("Action RCI failed")
 
             pt += self.prompt.rci_action_prompt
             instruciton = self.get_response(pt)
+            self.save(pt)
+
 
             pt += instruciton
             instruciton = self.process_instruction(instruciton)
@@ -243,6 +245,7 @@ class LLMAgent:
         pt += self.prompt.init_plan_prompt
 
         message = "\n" + self.get_response(pt)
+        self.save(pt)
 
         pt += message
 
@@ -251,7 +254,6 @@ class LLMAgent:
             pt += message
 
         self.current_plan = message
-        self.save(pt)
 
         return
 
@@ -349,6 +351,7 @@ class LLMAgent:
         pt += action_prompt
 
         message = self.get_response(pt)
+        self.save(pt)
 
         pt += self.process_instruction(message) + "`."
 
@@ -357,15 +360,13 @@ class LLMAgent:
         pt, instruction = self.rci_action(pt=pt, instruciton=message)
 
         self.past_instruction.append(instruction)
-
-        self.save(pt)
-
         return instruction
 
     def update_action(self, pt=None, message=None):
         if self.prompt.update_action and self.state_grounding:
             pt += self.prompt.update_action
             message = self.get_response(pt)
+            self.save(pt)
             pt += message
 
         return pt, message
