@@ -20,6 +20,7 @@ The RCI agent is implemented in Python 3.9 and requires the following dependenci
 ```sh
 pip install -r requirements.txt
 ```
+Note: [MiniWoB++](https://github.com/stanfordnlp/wge) is not officially supported on Windows. Please refer to [this issue](https://github.com/posgnu/rci-agent/issues/2).
 
 ## Usage
 
